@@ -59,6 +59,7 @@ pub const SIG_SIZE: usize = 96;
 
 /// The domain separator tag
 pub const DST: &[u8; 43] = b"BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_NUL_";
+pub const DST_G1: &[u8; 43] = b"BLS_SIG_BLS12381G1_XMD:SHA-256_SSWU_RO_NUL_";
 
 /// A public key.
 #[derive(Deserialize, Serialize, Copy, Clone, PartialEq, Eq)]
@@ -1492,7 +1493,7 @@ pub fn hash_g2<M: AsRef<[u8]>>(msg: M) -> G2Affine {
 }
 
 pub fn hash_g1<M: AsRef<[u8]>>(msg: M) -> G1Affine {
-    G1Projective::hash_to_curve(msg.as_ref(), DST, &[]).to_affine()
+    G1Projective::hash_to_curve(msg.as_ref(), DST_G1, &[]).to_affine()
 }
 
 /// Returns a hash of the group element and message, in the second group.
